@@ -145,17 +145,21 @@ get_header();
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php
+            /* FIX: Use meta_query for featured filter, meta_key for ordering only */
             $leaders = get_posts( [
                 'post_type'      => 'psi_leadership',
                 'posts_per_page' => 3,
-                'meta_key'       => '_psi_lead_featured',
-                'meta_value'     => '1',
-                'orderby'        => 'meta_value_num',
                 'meta_key'       => '_psi_lead_order',
+                'orderby'        => 'meta_value_num',
                 'order'          => 'ASC',
+                'meta_query'     => [
+                    [
+                        'key'   => '_psi_lead_featured',
+                        'value' => '1',
+                    ],
+                ],
             ] );
             if ( ! $leaders ) {
-                /* Fallback: show default 3 leaders if no posts yet */
                 $default_leaders = [
                     [ 'name' => 'Yotam Wonda, S.H., M.Si', 'pos' => 'Ketua DPW' ],
                     [ 'name' => 'Yotias Kobak, S.Sos', 'pos' => 'Sekretaris' ],
@@ -179,7 +183,7 @@ get_header();
             </div>
             <?php endforeach; ?>
             <?php } else { foreach ( $leaders as $i => $leader ) :
-                $pos = get_post_meta( $leader->ID, '_psi_lead_position', true );
+                $pos   = get_post_meta( $leader->ID, '_psi_lead_position', true );
                 $thumb = get_the_post_thumbnail_url( $leader->ID, 'psi-leader' ) ?: '';
             ?>
             <div class="psi-animate fade-up" style="animation-delay:<?php echo esc_attr( $i * 0.15 ); ?>s;">
