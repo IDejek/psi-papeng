@@ -1,0 +1,525 @@
+/* ═══════════════════════════════════════════════════════════
+   PSI Papeng Premium — Admin Dashboard Styles
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Variables ────────────────────────────────────────────── */
+:root {
+    --psi-red: #D6001C;
+    --psi-red-light: #FEF2F2;
+    --psi-red-dark: #A00015;
+    --psi-gold: #D4AF37;
+    --psi-black: #111111;
+    --psi-gray-50: #F9FAFB;
+    --psi-gray-100: #F3F4F6;
+    --psi-gray-200: #E5E7EB;
+    --psi-gray-300: #D1D5DB;
+    --psi-gray-400: #9CA3AF;
+    --psi-gray-500: #6B7280;
+    --psi-gray-600: #4B5563;
+    --psi-gray-700: #374151;
+    --psi-gray-800: #1F2937;
+    --psi-gray-900: #111827;
+    --psi-radius: 12px;
+    --psi-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    --psi-shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.04);
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+.psi-admin-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--psi-gray-700);
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.psi-admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--psi-gray-100);
+}
+.psi-admin-header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--psi-gray-900);
+    margin: 0;
+}
+
+.psi-admin-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.psi-admin-brand h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--psi-gray-900);
+    margin: 0;
+}
+.psi-admin-brand p {
+    margin: 0;
+}
+.psi-admin-logo {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--psi-red), var(--psi-red-dark));
+    border-radius: var(--psi-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(214,0,28,0.3);
+}
+.psi-logo-text {
+    color: white;
+    font-weight: 900;
+    font-size: 0.9rem;
+    line-height: 1;
+    font-family: 'Poppins', sans-serif;
+}
+.psi-logo-sub {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.psi-admin-version {
+    font-size: 0.75rem;
+    color: var(--psi-gray-400);
+    background: var(--psi-gray-100);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* ── Stats Grid ───────────────────────────────────────────── */
+.psi-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+.psi-stat-card {
+    background: white;
+    border-radius: var(--psi-radius);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--psi-shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--psi-gray-100);
+}
+.psi-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--psi-shadow-lg);
+}
+.psi-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+.psi-stat-red .psi-stat-icon { background: #FEF2F2; color: var(--psi-red); }
+.psi-stat-yellow .psi-stat-icon { background: #FFFBEB; color: #D97706; }
+.psi-stat-green .psi-stat-icon { background: #ECFDF5; color: #059669; }
+.psi-stat-blue .psi-stat-icon { background: #EFF6FF; color: #2563EB; }
+.psi-stat-purple .psi-stat-icon { background: #F5F3FF; color: #7C3AED; }
+.psi-stat-gray .psi-stat-icon { background: var(--psi-gray-100); color: var(--psi-gray-500); }
+
+.psi-stat-info {
+    display: flex;
+    flex-direction: column;
+}
+.psi-stat-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--psi-gray-900);
+    line-height: 1.2;
+    font-family: 'Poppins', sans-serif;
+}
+.psi-stat-label {
+    font-size: 0.75rem;
+    color: var(--psi-gray-500);
+    font-weight: 500;
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
+.psi-admin-card {
+    background: white;
+    border-radius: var(--psi-radius);
+    box-shadow: var(--psi-shadow);
+    border: 1px solid var(--psi-gray-100);
+    overflow: hidden;
+}
+.psi-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--psi-gray-100);
+    background: var(--psi-gray-50);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.psi-card-header h2 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--psi-gray-800);
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+.psi-card-body {
+    padding: 20px;
+}
+
+/* ── Table ────────────────────────────────────────────────── */
+.psi-table-responsive {
+    overflow-x: auto;
+}
+.psi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+.psi-table thead {
+    background: var(--psi-gray-50);
+}
+.psi-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--psi-gray-600);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--psi-gray-200);
+}
+.psi-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--psi-gray-100);
+    vertical-align: middle;
+}
+.psi-table tbody tr:hover {
+    background: var(--psi-gray-50);
+}
+.psi-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ── Badge ────────────────────────────────────────────────── */
+.psi-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--psi-gray-100);
+    color: var(--psi-gray-600);
+}
+.psi-status-pending {
+    background: #FFFBEB;
+    color: #D97706;
+}
+.psi-status-verified {
+    background: #ECFDF5;
+    color: #059669;
+}
+.psi-status-rejected {
+    background: #FEF2F2;
+    color: var(--psi-red);
+}
+
+/* ── Action Buttons ───────────────────────────────────────── */
+.psi-actions {
+    display: flex;
+    gap: 4px;
+}
+.psi-action-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+.psi-action-green { background: #ECFDF5; color: #059669; }
+.psi-action-green:hover { background: #059669; color: white; }
+.psi-action-yellow { background: #FFFBEB; color: #D97706; }
+.psi-action-yellow:hover { background: #D97706; color: white; }
+.psi-action-red { background: #FEF2F2; color: var(--psi-red); }
+.psi-action-red:hover { background: var(--psi-red); color: white; }
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.psi-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.psi-btn:hover { transform: translateY(-1px); }
+.psi-btn-red { background: var(--psi-red); color: white; }
+.psi-btn-red:hover { background: var(--psi-red-dark); box-shadow: 0 4px 12px rgba(214,0,28,0.3); }
+.psi-btn-gray { background: var(--psi-gray-200); color: var(--psi-gray-700); }
+.psi-btn-gray:hover { background: var(--psi-gray-300); }
+.psi-btn-ghost { background: transparent; color: var(--psi-gray-600); border: 1px solid var(--psi-gray-200); }
+.psi-btn-ghost:hover { background: var(--psi-gray-50); border-color: var(--psi-gray-300); }
+.psi-text-red { color: var(--psi-red) !important; }
+.psi-btn-sm {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--psi-red);
+    background: var(--psi-red-light);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.psi-btn-sm:hover { background: #FEE2E2; }
+
+/* ── Form Elements ────────────────────────────────────────── */
+.psi-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--psi-gray-200);
+    border-radius: 10px;
+    font-size: 0.875rem;
+    color: var(--psi-gray-800);
+    background: white;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+.psi-input:focus {
+    outline: none;
+    border-color: var(--psi-red);
+    box-shadow: 0 0 0 3px rgba(214,0,28,0.1);
+}
+.psi-input::placeholder {
+    color: var(--psi-gray-400);
+}
+.psi-select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--psi-gray-200);
+    border-radius: 10px;
+    font-size: 0.875rem;
+    color: var(--psi-gray-800);
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+.psi-select:focus {
+    outline: none;
+    border-color: var(--psi-red);
+    box-shadow: 0 0 0 3px rgba(214,0,28,0.1);
+}
+.psi-required {
+    color: var(--psi-red);
+}
+.psi-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.psi-form-full {
+    grid-column: 1 / -1;
+}
+.psi-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--psi-gray-700);
+}
+.psi-form-actions {
+    padding: 20px 0;
+    border-top: 1px solid var(--psi-gray-100);
+    margin-top: 20px;
+}
+
+/* ── Toggle Switch ────────────────────────────────────────── */
+.psi-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+.psi-toggle input {
+    display: none;
+}
+.psi-toggle-slider {
+    width: 44px;
+    height: 24px;
+    background: var(--psi-gray-300);
+    border-radius: 12px;
+    position: relative;
+    transition: background 0.3s ease;
+    flex-shrink: 0;
+}
+.psi-toggle-slider::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.psi-toggle input:checked + .psi-toggle-slider {
+    background: var(--psi-red);
+}
+.psi-toggle input:checked + .psi-toggle-slider::after {
+    transform: translateX(20px);
+}
+.psi-toggle-label {
+    font-size: 0.85rem;
+    color: var(--psi-gray-600);
+}
+
+/* ── Chart Bars ───────────────────────────────────────────── */
+.psi-chart-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.psi-chart-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 50px;
+    align-items: center;
+    gap: 12px;
+}
+.psi-chart-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--psi-gray-700);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.psi-chart-bar-track {
+    height: 8px;
+    background: var(--psi-gray-100);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.psi-chart-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+}
+.psi-chart-value {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--psi-gray-800);
+    text-align: right;
+}
+
+/* ── Pagination ───────────────────────────────────────────── */
+.psi-pagination-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-top: 1px solid var(--psi-gray-100);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.psi-page-btns {
+    display: flex;
+    gap: 4px;
+}
+.psi-page-btn {
+    min-width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--psi-gray-600);
+    background: white;
+    border: 1px solid var(--psi-gray-200);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.psi-page-btn:hover {
+    border-color: var(--psi-red);
+    color: var(--psi-red);
+}
+.psi-page-active {
+    background: var(--psi-red) !important;
+    color: white !important;
+    border-color: var(--psi-red) !important;
+}
+
+/* ── Notices ──────────────────────────────────────────────── */
+.psi-notice {
+    padding: 12px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.psi-notice-success {
+    background: #ECFDF5;
+    color: #059669;
+    border: 1px solid #A7F3D0;
+}
+.psi-notice-error {
+    background: #FEF2F2;
+    color: var(--psi-red);
+    border: 1px solid #FECACA;
+}
+
+/* ── Empty State ──────────────────────────────────────────── */
+.psi-empty-state {
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--psi-gray-400);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .psi-admin-wrap { padding: 12px; }
+    .psi-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .psi-form-grid { grid-template-columns: 1fr; }
+    .psi-chart-row { grid-template-columns: 100px 1fr 40px; }
+    .psi-stat-card { padding: 14px; }
+    .psi-stat-number { font-size: 1.2rem; }
+    .psi-stat-icon { width: 40px; height: 40px; font-size: 1rem; }
+}
+@media (max-width: 480px) {
+    .psi-stats-grid { grid-template-columns: 1fr; }
+}
