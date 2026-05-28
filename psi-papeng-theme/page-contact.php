@@ -84,11 +84,13 @@ get_header();
                 </div>
             </div>
 
-            <!-- Contact Form -->
+                            <!-- Contact Form -->
             <div>
                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Kirim Pesan</h2>
                 <form id="psiContactForm" class="space-y-5">
-                    <?php wp_nonce_field( 'psi_contact_nonce', 'psi_contact_nonce_field' ); ?>
+                    <?php
+                    /* FIX: Removed redundant nonce field — JS sends nonce via psiAjax.nonce */
+                    ?>
                     <div>
                         <label for="psiContactName" class="block text-sm font-medium text-gray-700 mb-1.5">Nama Lengkap <span class="text-red-500">*</span></label>
                         <input type="text" id="psiContactName" name="name" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm transition-shadow">
@@ -115,7 +117,6 @@ get_header();
                     </button>
                 </form>
             </div>
-        </div>
 
         <!-- Google Map -->
         <?php if ( $contact_map ) : ?>
