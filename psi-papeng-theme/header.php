@@ -1,6 +1,6 @@
 <?php
 /**
- * Header
+ * Header — FIXED
  * @package PSI_Papeng
  */
 defined( 'ABSPATH' ) || exit;
@@ -11,7 +11,11 @@ defined( 'ABSPATH' ) || exit;
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="profile" href="https://gmpg.org/xfn/11">
-<?php psi_papeng_preload(); ?>
+<?php
+/* FIX: Only output preconnect here, NOT via wp_head action */
+echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+?>
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -146,20 +150,27 @@ defined( 'ABSPATH' ) || exit;
 /* Helper: Get page ID by slug */
 function psi_get_page_id( $slug ): int {
     $page = get_page_by_path( $slug );
-    return $page ? $page->ID : 0;
+    return $page ? (int) $page->ID : 0;
 }
 
-/* Custom Nav Walker for premium styling */
+/* FIX: Nav Walker with proper group class for dropdowns */
 class PSI_Nav_Walker extends Walker_Nav_Menu {
     function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ): void {
         $classes = empty( $item->classes ) ? [] : (array) $item->classes;
-        $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
-        $atts = [];
-        $atts['href']   = ! empty( $item->url ) ? $item->url : '';
-        $atts['class']  = 'psi-nav-link relative px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors duration-200';
+        $has_children = in_array( 'menu-item-has-children', $classes, true );
+
+        if ( $depth === 0 && $has_children ) {
+            $output .= '<div class="relative group">';
+        }
+
+        $atts = [
+            'href'  => ! empty( $item->url ) ? $item->url : '',
+            'class' => 'psi-nav-link relative px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors duration-200',
+        ];
         if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current_page_item', $classes, true ) ) {
             $atts['class'] .= ' text-red-600';
         }
+
         $attributes = '';
         foreach ( $atts as $attr => $value ) {
             if ( ! empty( $value ) ) {
@@ -168,13 +179,26 @@ class PSI_Nav_Walker extends Walker_Nav_Menu {
         }
         $output .= '<a' . $attributes . '>';
         $output .= esc_html( apply_filters( 'the_title', $item->title, $item->ID ) );
+        if ( $depth === 0 && $has_children ) {
+            $output .= ' <i class="fas fa-chevron-down text-[0.6rem] ml-1 opacity-50 transition-transform duration-300 group-hover:rotate-180"></i>';
+        }
         $output .= '</a>';
     }
+
     function start_lvl( &$output, $depth = 0, $args = null ): void {
         $output .= '<div class="absolute top-full left-0 mt-0 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2 z-50">';
     }
+
     function end_lvl( &$output, $depth = 0, $args = null ): void {
         $output .= '</div>';
+    }
+
+    function end_el( &$output, $item, $depth = 0, $args = null ): void {
+        $classes = empty( $item->classes ) ? [] : (array) $item->classes;
+        $has_children = in_array( 'menu-item-has-children', $classes, true );
+        if ( $depth === 0 && $has_children ) {
+            $output .= '</div>';
+        }
     }
 }
 ?>
