@@ -1,0 +1,570 @@
+# PSI Papua Pegunungan Translation Template
+# Copyright (C) 2026 DPW PSI Papua Pegunungan
+# This file is distributed under the GPL v2.
+msgid ""
+msgstr ""
+"Project-Id-Version: PSI Papua Pegunungan 1.0.0\n"
+"Report-Msgid-Bugs-To: tombinawaiqbal@gmail.com\n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: Iqbal Tombinawa <tombinawaiqbal@gmail.com>\n"
+"Language-Team: Indonesian\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Primary Menu"
+msgstr "Menu Utama"
+
+msgid "Footer Menu"
+msgstr "Menu Footer"
+
+msgid "Mobile Menu"
+msgstr "Menu Mobile"
+
+msgid "Beranda"
+msgstr ""
+
+msgid "Profil"
+msgstr ""
+
+msgid "Kontak"
+msgstr ""
+
+msgid "Tautan Cepat"
+msgstr ""
+
+msgid "Ikuti Kami"
+msgstr ""
+
+msgid "Kirim Pesan"
+msgstr ""
+
+msgid "Nama Lengkap"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "No. Telepon"
+msgstr ""
+
+msgid "Subjek"
+msgstr ""
+
+msgid "Pesan"
+msgstr ""
+
+msgid "Daftar Anggota"
+msgstr ""
+
+msgid "Sidebar Utama"
+msgstr ""
+
+msgid "Sidebar utama untuk halaman berita"
+msgstr ""
+
+msgid "Footer Kolom 1"
+msgstr ""
+
+msgid "Footer Kolom 2"
+msgstr ""
+
+msgid "Footer Kolom 3"
+msgstr ""
+
+msgid "Slider"
+msgstr ""
+
+msgid "Slide"
+msgstr ""
+
+msgid "Hero Slider"
+msgstr ""
+
+msgid "Tambah Slide Baru"
+msgstr ""
+
+msgid "Semua Slide"
+msgstr ""
+
+msgid "Pimpinan"
+msgstr ""
+
+msgid "Tambah Pimpinan"
+msgstr ""
+
+msgid "Bidang Organisasi"
+msgstr ""
+
+msgid "Bidang"
+msgstr ""
+
+msgid "Tambah Bidang"
+msgstr ""
+
+msgid "DPD PSI"
+msgstr ""
+
+msgid "DPD"
+msgstr ""
+
+msgid "Data DPD"
+msgstr ""
+
+msgid "Tambah DPD"
+msgstr ""
+
+msgid "Video"
+msgstr ""
+
+msgid "Video Kegiatan"
+msgstr ""
+
+msgid "Tambah Video"
+msgstr ""
+
+msgid "Galeri"
+msgstr ""
+
+msgid "Galeri Foto"
+msgstr ""
+
+msgid "Tambah Galeri"
+msgstr ""
+
+msgid "Kategori Galeri"
+msgstr ""
+
+msgid "Kategori"
+msgstr ""
+
+msgid "Kategori Video"
+msgstr ""
+
+msgid "Detail Slide"
+msgstr ""
+
+msgid "Subjudul"
+msgstr ""
+
+msgid "Tombol 1 – Teks"
+msgstr ""
+
+msgid "Tombol 1 – URL"
+msgstr ""
+
+msgid "Tombol 2 – Teks"
+msgstr ""
+
+msgid "Tombol 2 – URL"
+msgstr ""
+
+msgid "Urutan"
+msgstr ""
+
+msgid "Detail Pimpinan"
+msgstr ""
+
+msgid "Jabatan"
+msgstr ""
+
+msgid "Facebook URL"
+msgstr ""
+
+msgid "Instagram URL"
+msgstr ""
+
+msgid "Twitter/X URL"
+msgstr ""
+
+msgid "Urutan Tampil"
+msgstr ""
+
+msgid "Tampilkan di Homepage"
+msgstr ""
+
+msgid "Detail DPD"
+msgstr ""
+
+msgid "Nama Ketua DPD"
+msgstr ""
+
+msgid "Jumlah Anggota"
+msgstr ""
+
+msgid "Detail Video"
+msgstr ""
+
+msgid "YouTube Embed URL"
+msgstr ""
+
+msgid "Vimeo Embed URL (opsional)"
+msgstr ""
+
+msgid "Detail Bidang"
+msgstr ""
+
+msgid "Nama Kepala Bidang"
+msgstr ""
+
+msgid "Jabatan Lengkap"
+msgstr ""
+
+msgid "Pengaturan PSI Papua Pegunungan"
+msgstr ""
+
+msgid "Sambutan Ketua"
+msgstr ""
+
+msgid "Teks Sambutan"
+msgstr ""
+
+msgid "Foto Ketua"
+msgstr ""
+
+msgid "Informasi Kontak"
+msgstr ""
+
+msgid "Alamat Kantor"
+msgstr ""
+
+msgid "Telepon"
+msgstr ""
+
+msgid "Email Resmi"
+msgstr ""
+
+msgid "WhatsApp (contoh: 6282267218125)"
+msgstr ""
+
+msgid "Google Maps Embed URL"
+msgstr ""
+
+msgid "Media Sosial"
+msgstr ""
+
+msgid "Teks Footer Tambahan"
+msgstr ""
+
+msgid "Teks Copyright"
+msgstr ""
+
+msgid "SEO Dasar"
+msgstr ""
+
+msgid "Site Title Override (kosongkan = default)"
+msgstr ""
+
+msgid "Meta Description Global"
+msgstr ""
+
+msgid "Robots Meta"
+msgstr ""
+
+msgid "Keanggotaan"
+msgstr ""
+
+msgid "URL Pendaftaran Anggota"
+msgstr ""
+
+msgid "Hasil Pencarian"
+msgstr ""
+
+msgid "Tidak Ditemukan"
+msgstr ""
+
+msgid "Bagikan:"
+msgstr ""
+
+msgid "Baca"
+msgstr ""
+
+msgid "menit baca"
+msgstr ""
+
+msgid "Berita Terkait"
+msgstr ""
+
+msgid "Komentar"
+msgstr ""
+
+msgid "Komentar ditutup."
+msgstr ""
+
+msgid "Halaman Tidak Ditemukan"
+msgstr ""
+
+msgid "Maaf, halaman yang Anda cari tidak ditemukan atau telah dipindahkan."
+msgstr ""
+
+msgid "Kembali ke Beranda"
+msgstr ""
+
+msgid "Hasil Pencarian: %s"
+msgstr ""
+
+msgid "Cari lagi..."
+msgstr ""
+
+msgid "Tidak ada hasil untuk pencarian tersebut."
+msgstr ""
+
+msgid "Belum ada konten."
+msgstr ""
+
+msgid "Baca Selengkapnya"
+msgstr ""
+
+msgid "PSI Dashboard"
+msgstr ""
+
+msgid "PSI Premium"
+msgstr ""
+
+msgid "Data Anggota"
+msgstr ""
+
+msgid "Tambah Anggota"
+msgstr ""
+
+msgid "Statistik Anggota"
+msgstr ""
+
+msgid "Log Aktivitas"
+msgstr ""
+
+msgid "Pengaturan"
+msgstr ""
+
+msgid "Jumlah per halaman"
+msgstr ""
+
+msgid "Panel administrasi premium"
+msgstr ""
+
+msgid "Total Anggota"
+msgstr ""
+
+msgid "Menunggu Verifikasi"
+msgstr ""
+
+msgid "Terverifikasi"
+msgstr ""
+
+msgid "Berita"
+msgstr ""
+
+msgid "Statistik per Kabupaten"
+msgstr ""
+
+msgid "Aktivitas Terbaru"
+msgstr ""
+
+msgid "Lihat Semua"
+msgstr ""
+
+msgid "Aksi"
+msgstr ""
+
+msgid "Deskripsi"
+msgstr ""
+
+msgid "IP"
+msgstr ""
+
+msgid "Waktu"
+msgstr ""
+
+msgid "Cari nama, email, telepon..."
+msgstr ""
+
+msgid "Semua Status"
+msgstr ""
+
+msgid "Ditolak"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Terdaftar"
+msgstr ""
+
+msgid "Yakin ingin menghapus?"
+msgstr ""
+
+msgid "Menampilkan %d–%d dari %d"
+msgstr ""
+
+msgid "Belum ada data anggota."
+msgstr ""
+
+msgid "Verifikasi"
+msgstr ""
+
+msgid "Tolak"
+msgstr ""
+
+msgid "Hapus"
+msgstr ""
+
+msgid "Kembali"
+msgstr ""
+
+msgid "Nama dan Email wajib diisi."
+msgstr ""
+
+msgid "Format email tidak valid."
+msgstr ""
+
+msgid "Email sudah terdaftar."
+msgstr ""
+
+msgid "Pilih"
+msgstr ""
+
+msgid "Laki-laki"
+msgstr ""
+
+msgid "Perempuan"
+msgstr ""
+
+msgid "Pekerjaan"
+msgstr ""
+
+msgid "Alamat"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Simpan Anggota"
+msgstr ""
+
+msgid "Lihat Data"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Berdasarkan Gender"
+msgstr ""
+
+msgid "Tren Pendaftaran Bulanan"
+msgstr ""
+
+msgid "Per Kabupaten"
+msgstr ""
+
+msgid "Persentase"
+msgstr ""
+
+msgid "Ekspor Data"
+msgstr ""
+
+msgid "Ekspor CSV"
+msgstr ""
+
+msgid "Hapus Semua Log"
+msgstr ""
+
+msgid "Yakin ingin menghapus semua log?"
+msgstr ""
+
+msgid "Belum ada log aktivitas."
+msgstr ""
+
+msgid "User ID"
+msgstr ""
+
+msgid "IP Address"
+msgstr ""
+
+msgid "Pengaturan Plugin"
+msgstr ""
+
+msgid "Pengaturan SMTP Email"
+msgstr ""
+
+msgid "Konfigurasi SMTP untuk pengiriman email notifikasi. Biarkan kosong jika menggunakan pengaturan default WordPress."
+msgstr ""
+
+msgid "SMTP Host"
+msgstr ""
+
+msgid "SMTP Port"
+msgstr ""
+
+msgid "SMTP Username"
+msgstr ""
+
+msgid "SMTP Password"
+msgstr ""
+
+msgid "From Email"
+msgstr ""
+
+msgid "From Name"
+msgstr ""
+
+msgid "Enkripsi"
+msgstr ""
+
+msgid "Tanpa Enkripsi"
+msgstr ""
+
+msgid "Pengaturan WhatsApp"
+msgstr ""
+
+msgid "Tombol WhatsApp Mengambang"
+msgstr ""
+
+msgid "Aktifkan"
+msgstr ""
+
+msgid "Nomor WhatsApp"
+msgstr ""
+
+msgid "Pengaturan Keanggotaan"
+msgstr ""
+
+msgid "URL Redirect Pendaftaran"
+msgstr ""
+
+msgid "URL yang dituju ketika pengguna klik \"Daftar Anggota\""
+msgstr ""
+
+msgid "Simpan Pengaturan"
+msgstr ""
+
+msgid "Pengaturan berhasil disimpan."
+msgstr ""
+
+msgid "Anggota berhasil diverifikasi."
+msgstr ""
+
+msgid "Anggota ditolak."
+msgstr ""
+
+msgid "Anggota berhasil dihapus."
+msgstr ""
+
+msgid "Anggota berhasil ditambahkan."
+msgstr ""
+
+msgid "Tanggal Lahir"
+msgstr ""
+
+msgid "Jenis Kelamin"
+msgstr ""
+
+msgid "NIK"
+msgstr ""
+
+msgid "Dukungan Teknis"
+msgstr ""
