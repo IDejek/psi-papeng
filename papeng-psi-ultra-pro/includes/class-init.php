@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Initializer
+ * Plugin Initializer — FIXED
  * @package PSI_Papeng
  */
 
@@ -26,6 +26,9 @@ class PSI_Papeng_Init {
         /* AJAX Handlers */
         new PSI_Papeng_Ajax();
 
+        /* Register sitemap query var */
+        add_filter( 'query_vars', [ $this, 'register_query_vars' ] );
+
         /* Frontend: Leader data endpoint */
         add_action( 'wp_ajax_psi_get_leader', [ $this, 'ajax_get_leader' ] );
         add_action( 'wp_ajax_nopriv_psi_get_leader', [ $this, 'ajax_get_leader' ] );
@@ -38,9 +41,18 @@ class PSI_Papeng_Init {
         add_action( 'wp_ajax_psi_member_register', [ $this, 'ajax_member_register' ] );
         add_action( 'wp_ajax_nopriv_psi_member_register', [ $this, 'ajax_member_register' ] );
 
-        /* XML Sitemap */
+        /* XML Sitemap rewrite + output */
         add_action( 'init', [ $this, 'register_sitemap_rewrite' ] );
         add_action( 'template_redirect', [ $this, 'sitemap_output' ] );
+
+        /* Robots.txt — add sitemap reference */
+        add_filter( 'robots_txt', [ $this, 'robots_txt_filter' ], 10, 2 );
+    }
+
+    /* ── Register Query Vars ───────────────────────────────── */
+    public function register_query_vars( array $vars ): array {
+        $vars[] = 'psi_sitemap';
+        return $vars;
     }
 
     /* ── AJAX: Get Leader Data ─────────────────────────────── */
@@ -63,7 +75,8 @@ class PSI_Papeng_Init {
 
     /* ── AJAX: Contact Form ────────────────────────────────── */
     public function ajax_contact_form(): void {
-        check_ajax_referer( 'psi_contact_nonce', 'nonce' );
+        /* FIX: Nonce action harus cocok dengan wp_create_nonce di functions.php */
+        check_ajax_referer( 'psi_papeng_nonce', 'nonce' );
 
         $name    = sanitize_text_field( wp_unslash( $_POST['name'] ?? '' ) );
         $email   = sanitize_email( wp_unslash( $_POST['email'] ?? '' ) );
@@ -79,17 +92,25 @@ class PSI_Papeng_Init {
         }
 
         $to = get_theme_mod( 'psi_contact_email', get_option( 'admin_email' ) );
+        if ( empty( $to ) ) {
+            $to = get_option( 'admin_email' );
+        }
+
         $headers = [
             'Content-Type: text/html; charset=UTF-8',
             'From: ' . $name . ' <' . $email . '>',
             'Reply-To: ' . $email,
         ];
-        $body = "<h2>Pesan dari Website</h2>";
-        $body .= "<p><strong>Nama:</strong> " . esc_html( $name ) . "</p>";
-        $body .= "<p><strong>Email:</strong> " . esc_html( $email ) . "</p>";
-        if ( $phone ) $body .= "<p><strong>Telepon:</strong> " . esc_html( $phone ) . "</p>";
-        $body .= "<p><strong>Subjek:</strong> " . esc_html( $subject ) . "</p>";
-        $body .= "<p><strong>Pesan:</strong><br>" . nl2br( esc_html( $message ) ) . "</p>";
+        $body  = "<h2 style=\"margin:0 0 16px;\">Pesan dari Website PSI Papua Pegunungan</h2>";
+        $body .= "<table style=\"border-collapse:collapse;font-family:sans-serif;\">";
+        $body .= "<tr><td style=\"padding:8px 16px 8px 0;font-weight:bold;\">Nama</td><td style=\"padding:8px 0;\">" . esc_html( $name ) . "</td></tr>";
+        $body .= "<tr><td style=\"padding:8px 16px 8px 0;font-weight:bold;\">Email</td><td style=\"padding:8px 0;\">" . esc_html( $email ) . "</td></tr>";
+        if ( $phone ) {
+            $body .= "<tr><td style=\"padding:8px 16px 8px 0;font-weight:bold;\">Telepon</td><td style=\"padding:8px 0;\">" . esc_html( $phone ) . "</td></tr>";
+        }
+        $body .= "<tr><td style=\"padding:8px 16px 8px 0;font-weight:bold;\">Subjek</td><td style=\"padding:8px 0;\">" . esc_html( $subject ) . "</td></tr>";
+        $body .= "<tr><td style=\"padding:8px 16px 8px 0;font-weight:bold;vertical-align:top;\">Pesan</td><td style=\"padding:8px 0;\">" . nl2br( esc_html( $message ) ) . "</td></tr>";
+        $body .= "</table>";
 
         $sent = wp_mail( $to, '[Kontak Website] ' . $subject, $body, $headers );
 
@@ -97,7 +118,7 @@ class PSI_Papeng_Init {
             PSI_Papeng_Activator::log( 'contact_sent', 'Pesan kontak dari ' . $name . ' (' . $email . ')' );
             wp_send_json_success( 'Pesan Anda berhasil dikirim. Terima kasih!' );
         } else {
-            wp_send_json_error( 'Gagal mengirim pesan. Silakan coba lagi.' );
+            wp_send_json_error( 'Gagal mengirim pesan. Silakan coba lagi atau hubungi kami via WhatsApp.' );
         }
     }
 
@@ -115,12 +136,11 @@ class PSI_Papeng_Init {
             'kabupaten'  => sanitize_text_field( wp_unslash( $_POST['kabupaten'] ?? '' ) ),
             'nik'        => sanitize_text_field( wp_unslash( $_POST['nik'] ?? '' ) ),
             'birth_date' => sanitize_text_field( wp_unslash( $_POST['birth_date'] ?? '' ) ),
-            'gender'     => sanitize_text_field( wp_unslash( $_POST['gender'] ?? '' ) ),
+            'gender'     => sanitize_key( $_POST['gender'] ?? '' ),
             'occupation' => sanitize_text_field( wp_unslash( $_POST['occupation'] ?? '' ) ),
             'address'    => sanitize_textarea_field( wp_unslash( $_POST['address'] ?? '' ) ),
         ];
 
-        /* Validation */
         if ( empty( $data['full_name'] ) || empty( $data['email'] ) || empty( $data['phone'] ) || empty( $data['kabupaten'] ) ) {
             wp_send_json_error( 'Nama, Email, Telepon, dan Kabupaten wajib diisi.' );
         }
@@ -128,15 +148,18 @@ class PSI_Papeng_Init {
             wp_send_json_error( 'Format email tidak valid.' );
         }
 
-        /* Check duplicate */
         $exists = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $table WHERE email = %s", $data['email'] ) );
         if ( $exists ) {
             wp_send_json_error( 'Email sudah terdaftar.' );
         }
 
+        /* FIX: Use NULL for empty date to avoid strict SQL error */
         $data['status']             = 'pending';
         $data['verification_token'] = wp_generate_password( 32, false );
         $data['registered_at']      = current_time( 'mysql' );
+        if ( empty( $data['birth_date'] ) ) {
+            $data['birth_date'] = null;
+        }
 
         $inserted = $wpdb->insert( $table, $data );
         if ( ! $inserted ) {
@@ -145,20 +168,33 @@ class PSI_Papeng_Init {
 
         $member_id = $wpdb->insert_id;
 
-        /* Send verification email */
+        /* Send verification email to member */
         $to      = $data['email'];
         $subject = 'Pendaftaran Anggota PSI Papua Pegunungan';
-        $body    = '<h2>Terima kasih telah mendaftar!</h2>';
-        $body   .= '<p>Pendaftaran Anda sebagai calon anggota PSI Papua Pegunungan telah kami terima.</p>';
-        $body   .= '<p>Status saat ini: <strong>Menunggu Verifikasi</strong></p>';
-        $body   .= '<p>Anda akan diberitahu setelah pendaftaran diverifikasi oleh admin.</p>';
-        $body   .= '<p>Hormat kami,<br>DPW PSI Papua Pegunungan</p>';
+        $body    = '<div style="font-family:sans-serif;max-width:600px;margin:0 auto;">';
+        $body   .= '<div style="background:#D6001C;color:white;padding:24px;border-radius:12px 12px 0 0;text-align:center;">';
+        $body   .= '<h1 style="margin:0;font-size:20px;">PSI Papua Pegunungan</h1>';
+        $body   .= '</div>';
+        $body   .= '<div style="padding:24px;background:white;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px;">';
+        $body   .= '<h2 style="margin:0 0 12px;color:#111;">Terima kasih telah mendaftar!</h2>';
+        $body   .= '<p style="color:#4B5563;line-height:1.6;">Pendaftaran Anda sebagai calon anggota PSI Papua Pegunungan telah kami terima.</p>';
+        $body   .= '<p style="color:#4B5563;line-height:1.6;">Status saat ini: <strong style="color:#D6001C;">Menunggu Verifikasi</strong></p>';
+        $body   .= '<p style="color:#4B5563;line-height:1.6;">Anda akan diberitahu setelah pendaftaran diverifikasi oleh admin.</p>';
+        $body   .= '<hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;">';
+        $body   .= '<p style="color:#9CA3AF;font-size:13px;margin:0;">Hormat kami,<br>DPW PSI Papua Pegunungan</p>';
+        $body   .= '</div></div>';
 
         wp_mail( $to, $subject, $body, [ 'Content-Type: text/html; charset=UTF-8' ] );
 
         /* Notify admin */
         $admin_to = get_option( 'admin_email' );
-        wp_mail( $admin_to, '[Pendaftaran Baru] ' . $data['full_name'], "Anggota baru mendaftar:\n\nNama: {$data['full_name']}\nEmail: {$data['email']}\nTelepon: {$data['phone']}\nKabupaten: {$data['kabupaten']}\n\nVerifikasi di admin panel." );
+        $admin_body = "Anggota baru mendaftar:\n\n";
+        $admin_body .= "Nama: {$data['full_name']}\n";
+        $admin_body .= "Email: {$data['email']}\n";
+        $admin_body .= "Telepon: {$data['phone']}\n";
+        $admin_body .= "Kabupaten: {$data['kabupaten']}\n\n";
+        $admin_body .= "Verifikasi di: " . admin_url( 'admin.php?page=psi-members' );
+        wp_mail( $admin_to, '[Pendaftaran Baru] ' . $data['full_name'], $admin_body );
 
         PSI_Papeng_Activator::log( 'member_registered', 'Pendaftaran anggota baru: ' . $data['full_name'] );
 
@@ -177,22 +213,18 @@ class PSI_Papeng_Init {
         echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
-        /* Homepage */
         $this->sitemap_url( home_url( '/' ), 'daily', '1.0' );
 
-        /* Pages */
         $pages = get_posts( [ 'post_type' => 'page', 'posts_per_page' => 50, 'post_status' => 'publish' ] );
         foreach ( $pages as $p ) {
             $this->sitemap_url( get_permalink( $p->ID ), 'weekly', '0.8', $p->post_modified );
         }
 
-        /* Posts */
         $posts = get_posts( [ 'post_type' => 'post', 'posts_per_page' => 100, 'post_status' => 'publish' ] );
         foreach ( $posts as $p ) {
             $this->sitemap_url( get_permalink( $p->ID ), 'monthly', '0.6', $p->post_modified );
         }
 
-        /* CPTs */
         $cpts = [ 'psi_dpd', 'psi_video', 'psi_gallery', 'psi_leadership', 'psi_division' ];
         foreach ( $cpts as $cpt ) {
             $items = get_posts( [ 'post_type' => $cpt, 'posts_per_page' => 100, 'post_status' => 'publish' ] );
@@ -209,5 +241,13 @@ class PSI_Papeng_Init {
         echo '<url><loc>' . esc_url( $loc ) . '</loc>';
         if ( $mod ) echo '<lastmod>' . esc_html( $mod ) . '</lastmod>';
         echo '<changefreq>' . esc_html( $freq ) . '</changefreq><priority>' . esc_html( $prio ) . '</priority></url>' . "\n";
+    }
+
+    /* ── Robots.txt Filter ─────────────────────────────────── */
+    public function robots_txt_filter( string $output, bool $public ): string {
+        if ( $public ) {
+            $output .= "\nSitemap: " . esc_url( home_url( '/sitemap.xml' ) ) . "\n";
+        }
+        return $output;
     }
 }
