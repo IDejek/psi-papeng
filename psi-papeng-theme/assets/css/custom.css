@@ -1,0 +1,196 @@
+/* ═══════════════════════════════════════════════════════════
+   PSI Papua Pegunungan — Custom Stylesheet
+   Version: 1.0.0
+   Author: Iqbal Tombinawa
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Base ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #374151;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Typography ───────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', 'Inter', sans-serif; line-height: 1.2; }
+.psi-content h1 { font-size: 2rem; font-weight: 800; margin: 1.5em 0 0.5em; }
+.psi-content h2 { font-size: 1.5rem; font-weight: 700; margin: 1.5em 0 0.5em; }
+.psi-content h3 { font-size: 1.25rem; font-weight: 600; margin: 1.25em 0 0.5em; }
+.psi-content p { margin: 0 0 1em; }
+.psi-content img { border-radius: 1rem; max-width: 100%; height: auto; }
+.psi-content ul, .psi-content ol { padding-left: 1.5em; margin: 0 0 1em; }
+.psi-content li { margin-bottom: 0.25em; }
+.psi-content a { color: #D6001C; text-decoration: underline; text-underline-offset: 2px; }
+.psi-content a:hover { color: #a00015; }
+.psi-content blockquote {
+    border-left: 4px solid #D6001C;
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    background: #FEF2F2;
+    border-radius: 0 0.75rem 0.75rem 0;
+    font-style: italic;
+    color: #4B5563;
+}
+
+/* ── Navigation Links ─────────────────────────────────────── */
+.psi-nav-link { position: relative; }
+.psi-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #D6001C;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+.psi-nav-link:hover::after,
+.psi-nav-link[class*="text-red-600"]::after {
+    width: 60%;
+}
+.psi-navbar .menu-item-has-children { position: relative; }
+.psi-navbar .menu-item-has-children > a { padding-right: 1.5rem; }
+.psi-navbar .menu-item-has-children > a::before {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.6rem;
+    position: absolute;
+    right: 0.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+.psi-navbar .menu-item-has-children:hover > a::before { transform: translateY(-50%) rotate(180deg); }
+.psi-navbar .sub-menu a { display: block; padding: 0.5rem 1rem; font-size: 0.875rem; }
+.psi-navbar .sub-menu a:hover { background: #FEF2F2; color: #D6001C; }
+
+/* ── Topbar ───────────────────────────────────────────────── */
+.psi-topbar { font-family: 'Inter', monospace; }
+
+/* ── Hero Slider ──────────────────────────────────────────── */
+.psi-hero { min-height: 500px; }
+@media (min-width: 768px) { .psi-hero { min-height: 600px; } }
+@media (min-width: 1024px) { .psi-hero { min-height: 700px; } }
+
+/* ── Scroll Animations ────────────────────────────────────── */
+.psi-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.psi-animate.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Glassmorphism Card ───────────────────────────────────── */
+.psi-glass {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* ── Line Clamp ───────────────────────────────────────────── */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ── Scrollbar Hide ───────────────────────────────────────── */
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* ── Custom Pagination ────────────────────────────────────── */
+.psi-pagination .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0 0.5rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4B5563;
+    background: white;
+    border: 1px solid #E5E7EB;
+    transition: all 0.2s ease;
+}
+.psi-pagination .page-numbers:hover { border-color: #D6001C; color: #D6001C; }
+.psi-pagination .page-numbers.current { background: #D6001C; color: white; border-color: #D6001C; }
+
+/* ── Breadcrumb ───────────────────────────────────────────── */
+.psi-breadcrumb a { text-decoration: none; }
+.psi-breadcrumb ol { list-style: none; padding: 0; margin: 0; }
+
+/* ── WA Float Animation ───────────────────────────────────── */
+@keyframes waPulse {
+    0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+    70% { box-shadow: 0 0 0 15px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+#psiWAFloat { animation: waPulse 2s infinite; }
+
+/* ── Profile Tabs Active ──────────────────────────────────── */
+.psi-profile-tab.active { color: #D6001C; border-color: #D6001C; }
+
+/* ── Gallery Filter Active ────────────────────────────────── */
+.psi-gallery-filter.active { background: #D6001C !important; color: white !important; border-color: #D6001C !important; }
+
+/* ── Reading Progress ─────────────────────────────────────── */
+#psi-reading-progress { transition: width 0.05s linear; }
+
+/* ── Metabox Styles ───────────────────────────────────────── */
+.psi-metabox label { display: block; margin-bottom: 4px; font-weight: 600; }
+.psi-metabox input[type="text"],
+.psi-metabox input[type="url"],
+.psi-metabox input[type="email"],
+.psi-metabox input[type="tel"],
+.psi-metabox input[type="number"],
+.psi-metabox textarea {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+.psi-metabox input:focus,
+.psi-metabox textarea:focus {
+    outline: none;
+    border-color: #D6001C;
+    box-shadow: 0 0 0 3px rgba(214,0,28,0.1);
+}
+
+/* ── Selection ────────────────────────────────────────────── */
+::selection { background: #D6001C; color: white; }
+
+/* ── Focus Visible ────────────────────────────────────────── */
+:focus-visible { outline: 2px solid #D6001C; outline-offset: 2px; border-radius: 4px; }
+
+/* ── Smooth image loading ─────────────────────────────────── */
+img { transition: opacity 0.3s ease; }
+
+/* ── Admin Sidebar Widget ─────────────────────────────────── */
+.psi-widget-title { border-color: #D6001C !important; }
+
+/* ── Loading Skeleton ─────────────────────────────────────── */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+.psi-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.5rem;
+}
