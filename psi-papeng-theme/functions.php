@@ -256,13 +256,6 @@ function psi_papeng_pingback(): void {
     }
 }
 
-/* ── Preload Critical Fonts ───────────────────────────────── */
-add_action( 'wp_head', 'psi_papeng_preload', 1 );
-function psi_papeng_preload(): void {
-    echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
-    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
-}
-
 /* ── Disable Emoji Scripts (Performance) ──────────────────── */
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
