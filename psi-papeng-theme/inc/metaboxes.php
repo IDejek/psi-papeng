@@ -1,6 +1,6 @@
 <?php
 /**
- * Custom Meta Boxes
+ * Custom Meta Boxes — FIXED
  * @package PSI_Papeng
  */
 
@@ -41,10 +41,18 @@ function psi_save_slider_meta( $post_id ): void {
     if ( ! isset( $_POST['psi_slider_nonce_field'] ) || ! wp_verify_nonce( $_POST['psi_slider_nonce_field'], 'psi_slider_nonce' ) ) return;
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
     if ( ! current_user_can( 'edit_post', $post_id ) ) return;
-    $fields = [ 'psi_slider_subtitle', 'psi_slider_btn_text', 'psi_slider_btn_url', 'psi_slider_btn_text2', 'psi_slider_btn_url2', 'psi_slider_order' ];
-    foreach ( $fields as $f ) {
-        if ( isset( $_POST[ $f ] ) ) {
-            update_post_meta( $post_id, '_psi_' . str_replace( 'psi_slider_', '', $f ), sanitize_text_field( wp_unslash( $_POST[ $f ] ) ) );
+
+    $map = [
+        'psi_slider_subtitle' => '_psi_slider_subtitle',
+        'psi_slider_btn_text' => '_psi_slider_btn_text',
+        'psi_slider_btn_url'  => '_psi_slider_btn_url',
+        'psi_slider_btn_text2'=> '_psi_slider_btn_text2',
+        'psi_slider_btn_url2' => '_psi_slider_btn_url2',
+        'psi_slider_order'    => '_psi_slider_order',
+    ];
+    foreach ( $map as $field => $meta_key ) {
+        if ( isset( $_POST[ $field ] ) ) {
+            update_post_meta( $post_id, $meta_key, sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) );
         }
     }
 }
@@ -56,12 +64,12 @@ function psi_leadership_metabox(): void {
 }
 function psi_leadership_metabox_cb( $post ): void {
     wp_nonce_field( 'psi_lead_nonce', 'psi_lead_nonce_field' );
-    $position     = get_post_meta( $post->ID, '_psi_lead_position', true );
-    $fb           = get_post_meta( $post->ID, '_psi_lead_facebook', true );
-    $ig           = get_post_meta( $post->ID, '_psi_lead_instagram', true );
-    $tw           = get_post_meta( $post->ID, '_psi_lead_twitter', true );
-    $order        = get_post_meta( $post->ID, '_psi_lead_order', true );
-    $featured     = get_post_meta( $post->ID, '_psi_lead_featured', true );
+    $position = get_post_meta( $post->ID, '_psi_lead_position', true );
+    $fb       = get_post_meta( $post->ID, '_psi_lead_facebook', true );
+    $ig       = get_post_meta( $post->ID, '_psi_lead_instagram', true );
+    $tw       = get_post_meta( $post->ID, '_psi_lead_twitter', true );
+    $order    = get_post_meta( $post->ID, '_psi_lead_order', true );
+    $featured = get_post_meta( $post->ID, '_psi_lead_featured', true );
     ?>
     <div class="psi-metabox" style="max-width:600px;">
         <p><label for="psi_lead_position"><strong>Jabatan</strong></label><br>
@@ -83,10 +91,17 @@ function psi_save_leadership_meta( $post_id ): void {
     if ( ! isset( $_POST['psi_lead_nonce_field'] ) || ! wp_verify_nonce( $_POST['psi_lead_nonce_field'], 'psi_lead_nonce' ) ) return;
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
     if ( ! current_user_can( 'edit_post', $post_id ) ) return;
-    $text_fields = [ 'psi_lead_position', 'psi_lead_facebook', 'psi_lead_instagram', 'psi_lead_twitter', 'psi_lead_order' ];
-    foreach ( $text_fields as $f ) {
-        if ( isset( $_POST[ $f ] ) ) {
-            update_post_meta( $post_id, '_psi_' . str_replace( 'psi_lead_', '', $f ), sanitize_text_field( wp_unslash( $_POST[ $f ] ) ) );
+
+    $map = [
+        'psi_lead_position'  => '_psi_lead_position',
+        'psi_lead_facebook'  => '_psi_lead_facebook',
+        'psi_lead_instagram' => '_psi_lead_instagram',
+        'psi_lead_twitter'   => '_psi_lead_twitter',
+        'psi_lead_order'     => '_psi_lead_order',
+    ];
+    foreach ( $map as $field => $meta_key ) {
+        if ( isset( $_POST[ $field ] ) ) {
+            update_post_meta( $post_id, $meta_key, sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) );
         }
     }
     update_post_meta( $post_id, '_psi_lead_featured', isset( $_POST['psi_lead_featured'] ) ? '1' : '0' );
@@ -99,11 +114,11 @@ function psi_dpd_metabox(): void {
 }
 function psi_dpd_metabox_cb( $post ): void {
     wp_nonce_field( 'psi_dpd_nonce', 'psi_dpd_nonce_field' );
-    $ketua    = get_post_meta( $post->ID, '_psi_dpd_ketua', true );
-    $phone    = get_post_meta( $post->ID, '_psi_dpd_phone', true );
-    $email    = get_post_meta( $post->ID, '_psi_dpd_email', true );
-    $address  = get_post_meta( $post->ID, '_psi_dpd_address', true );
-    $members  = get_post_meta( $post->ID, '_psi_dpd_members', true );
+    $ketua   = get_post_meta( $post->ID, '_psi_dpd_ketua', true );
+    $phone   = get_post_meta( $post->ID, '_psi_dpd_phone', true );
+    $email   = get_post_meta( $post->ID, '_psi_dpd_email', true );
+    $address = get_post_meta( $post->ID, '_psi_dpd_address', true );
+    $members = get_post_meta( $post->ID, '_psi_dpd_members', true );
     ?>
     <div class="psi-metabox" style="max-width:600px;">
         <p><label for="psi_dpd_ketua"><strong>Nama Ketua DPD</strong></label><br>
@@ -124,10 +139,17 @@ function psi_save_dpd_meta( $post_id ): void {
     if ( ! isset( $_POST['psi_dpd_nonce_field'] ) || ! wp_verify_nonce( $_POST['psi_dpd_nonce_field'], 'psi_dpd_nonce' ) ) return;
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
     if ( ! current_user_can( 'edit_post', $post_id ) ) return;
-    $fields = [ 'psi_dpd_ketua', 'psi_dpd_phone', 'psi_dpd_email', 'psi_dpd_address', 'psi_dpd_members' ];
-    foreach ( $fields as $f ) {
-        if ( isset( $_POST[ $f ] ) ) {
-            update_post_meta( $post_id, '_psi_' . str_replace( 'psi_dpd_', '', $f ), sanitize_text_field( wp_unslash( $_POST[ $f ] ) ) );
+
+    $map = [
+        'psi_dpd_ketua'   => '_psi_dpd_ketua',
+        'psi_dpd_phone'   => '_psi_dpd_phone',
+        'psi_dpd_email'   => '_psi_dpd_email',
+        'psi_dpd_address' => '_psi_dpd_address',
+        'psi_dpd_members' => '_psi_dpd_members',
+    ];
+    foreach ( $map as $field => $meta_key ) {
+        if ( isset( $_POST[ $field ] ) ) {
+            update_post_meta( $post_id, $meta_key, sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) );
         }
     }
 }
@@ -189,10 +211,15 @@ function psi_save_division_meta( $post_id ): void {
     if ( ! isset( $_POST['psi_div_nonce_field'] ) || ! wp_verify_nonce( $_POST['psi_div_nonce_field'], 'psi_div_nonce' ) ) return;
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
     if ( ! current_user_can( 'edit_post', $post_id ) ) return;
-    $fields = [ 'psi_div_head', 'psi_div_head_title', 'psi_div_order' ];
-    foreach ( $fields as $f ) {
-        if ( isset( $_POST[ $f ] ) ) {
-            update_post_meta( $post_id, '_psi_' . str_replace( 'psi_div_', '', $f ), sanitize_text_field( wp_unslash( $_POST[ $f ] ) ) );
+
+    $map = [
+        'psi_div_head'       => '_psi_div_head',
+        'psi_div_head_title' => '_psi_div_head_title',
+        'psi_div_order'      => '_psi_div_order',
+    ];
+    foreach ( $map as $field => $meta_key ) {
+        if ( isset( $_POST[ $field ] ) ) {
+            update_post_meta( $post_id, $meta_key, sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) );
         }
     }
 }
