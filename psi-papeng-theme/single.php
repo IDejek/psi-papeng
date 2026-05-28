@@ -1,9 +1,18 @@
 <?php
 /**
- * Single Post Template
+ * Single Post Template — FIXED
  * @package PSI_Papeng
  */
 defined( 'ABSPATH' ) || exit;
+
+/* FIX: Move helper function BEFORE template output */
+function psi_reading_time(): string {
+    $content = get_post_field( 'post_content', get_the_ID() );
+    $words   = str_word_count( strip_tags( $content ) );
+    $minutes = ceil( $words / 200 );
+    return $minutes . ' ' . esc_html__( 'menit baca', 'psi-papeng' );
+}
+
 get_header();
 ?>
 <div class="psi-page-header bg-gradient-to-r from-gray-900 to-red-900 py-12 md:py-16">
@@ -85,13 +94,4 @@ get_header();
         </div>
     </div>
 </div>
-<?php
-/* Helper: Reading Time */
-function psi_reading_time(): string {
-    $content = get_post_field( 'post_content', get_the_ID() );
-    $words   = str_word_count( strip_tags( $content ) );
-    $minutes = ceil( $words / 200 );
-    return $minutes . ' ' . esc_html__( 'menit baca', 'psi-papeng' );
-}
-get_footer();
-?>
+<?php get_footer(); ?>
